@@ -1,3 +1,5 @@
+import random
+
 """
 - Exercise:
 Write a program that takes two numbers, checks which one is the biggest and return a message.
@@ -26,9 +28,15 @@ Implement a way to assign only 5 attempts to the user. Each iteration should sho
 Hint: check what the random library does
 """
 
-# exercise solution ############################################################
-import random
+# exercise solution A ############################################################
+"""
+This solution utilise the combination of if, elif and else. 
+int() and str() are used to convert the user input (string) to an integer and convert it back to strings to allow string concatenation.
 
+What if you change if, elif in if,if?
+What happens and why?
+
+"""
 
 print("Insert the first number: ")
 first_num = int(input('> '))
@@ -42,8 +50,30 @@ elif first_num > second_num:
 else:
     print(str(second_num) + " is the bigger number.")
 
-# exercise solution with extra ############################################################
+# exercise solution B ############################################################
+"""
+This solutions works, but compared to solution A requires a nested if statement. 
+When writing code, always try to avoid nesting when possible. 
+More readable solutions are always preferred because they facilitate troubleshooting and debugging, especially when working in teams where other developers might have to debug your code. 
+"""
+print("Insert the first number: ")
+first_num = int(input('> '))
+print("Insert the second number: ")
+second_num = int(input('> '))
 
+if first_num != second_num:
+    if first_num > second_num:
+        print(str(first_num) + " is the bigger number")
+    else:
+        print(str(second_num) + " is the bigger number")
+else:
+    print("Numbers are equal")
+# exercise solution with extra ############################################################
+"""
+In this solution, the block of code responsible for the user input is being included into a try-except block.
+If an error occur, Python will normally stop and generate an error message.
+The try - except block allow us to catch a specific error (or any error) that could be raised and print a message to the user instead of stopping the program execution.
+"""
 try:
     print("Insert the first number: ")
     first_num = int(input('> '))
