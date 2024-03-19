@@ -1,7 +1,7 @@
 """
 This is the solution for the homeworks assigned in Mod 1.
 In this assignment, you had to write a program that calculates the area and the perimeter
-of a triangle. Ignore having to check if the sides are form a valid triangle.
+of a triangle. Ignore having to check if is a valid triangle.
 """
 
 import math
