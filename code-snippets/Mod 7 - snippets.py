@@ -8,12 +8,10 @@ arr_s = np.arange(10)
 arr_2d = arr_s.reshape(2, 5)
 
 # creating a 2d dimensional
-my_2d = np.array([[85, 90, 92],[88, 89, 91],[75, 78, 82],[93, 94, 96]])
+my_2d = np.array([[85, 90, 92],[88, 89, 91], [75, 78, 82], [93, 94, 96]])
 
 # creating a 3 dimensional 
 arr_3d = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]])
-
-
 
 
 ''' advanced indexing '''
@@ -33,10 +31,10 @@ my_list = [[85, 90, 92],
 # basic indexing works for both
 
 
-# advance indexing only for arrays
-my_list[1, 2] # error
+# advanced indexing only for arrays
+print(my_list[1, 2]) # error
 
-scores[1, :]
+print(scores[1, :])
 
 # Select the third column (index 2)
 third_column = scores[:, 2]
@@ -53,8 +51,6 @@ scores[0, 2] = 20
 scores[-1, :] = 0
 
 
-
-
 ''' mathematical methods '''
 scores.mean()
 scores.sum()
@@ -63,7 +59,7 @@ scores.sum(axis=0)
 # Select scores greater than 90
 high_scores = scores[scores > 90]
 
-# return boolean according to coindition
+# return boolean according to condition
 scores == 90
 
 # Select rows where the first column value is greater than 85
@@ -73,11 +69,9 @@ selected_rows = scores[scores[:, 0] > 85]
 print(scores.swapaxes(1,0))
 
 
-
-
 ''' numerical computations and vectorisation '''
 
-ls =[1, 2, 3]
+ls = [1, 2, 3]
 
 arr = np.array(ls)
 

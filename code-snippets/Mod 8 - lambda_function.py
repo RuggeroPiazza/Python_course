@@ -2,9 +2,10 @@ import boto3
 import csv
 import os
 import json
+from io import StringIO
 
 
-# instantiate client 
+# instantiate client
 s3 = boto3.client('s3')
 sns = boto3.client('sns')
 
@@ -24,7 +25,7 @@ def lambda_handler(event, context):
     if event_name == "ObjectRemoved:Delete":
         delete = True
         return send_notification(delete, key, bucket)
-    
+
     response = s3.get_object(Bucket=bucket, Key=key)
     if response:
         data = response['Body'].read().decode('utf-8')
@@ -35,23 +36,21 @@ def lambda_handler(event, context):
                 print("SNS publish - successful")
             else:
                 print("SNS publish - failed")
-        else:    
+        else:
             print("No email found in the CSV")
     else:
         print("Get Object - Failed")
-    # return {         
+    # return {
     #         'statusCode': 200,
     #         'body': json.dumps('Hello from Lambda! Real Test')
     # }
 
-    
+
 def process_data(data):
-    reader = csv.reader(data.split('\n'))
+    file = StringIO(data)
+    reader = csv.reader(file, delimiter=',')
     emails = {}
-    for item in list(reader):
-        # print(item)
-        # if "Theodore" in item:
-        #     return item[3]
+    for item in reader:
         if item:
             emails[f"{item[1]} {item[2]}"] = item[3]
     # print(emails)
@@ -65,10 +64,10 @@ def send_notification(delete, key, bucket, emails=[]):
     else:
         subject = "Object uploaded onto the S3 bucket"
         sns_message = json.dumps(emails, indent=2)
-    
+
     sns_response = sns.publish(
-            TargetArn=TOPIC_ARN,
-            Message=sns_message,
-            Subject=subject
-            )
+        TargetArn=TOPIC_ARN,
+        Message=sns_message,
+        Subject=subject
+    )
     return sns_response
